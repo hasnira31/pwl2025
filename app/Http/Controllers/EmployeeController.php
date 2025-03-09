@@ -1,9 +1,7 @@
-
 <?php
 
 namespace App\Http\Controllers;
 
-use App\Models\Employee;
 use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
@@ -15,8 +13,7 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $employees = Employee::all();
-        return view('employees.index', compact('employees'));
+        //
     }
 
     /**
@@ -26,7 +23,7 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        return view('employees.create');
+        //
     }
 
     /**
@@ -37,72 +34,51 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'position' => 'required|string|max:255',
-            'salary' => 'required|numeric|min:0',
-        ]);
-
-        Employee::create($request->all());
-        
-        return redirect()->route('employees.index')
-            ->with('success', 'Pegawai berhasil ditambahkan!');
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Employee  $employee
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Employee $employee)
+    public function show($id)
     {
-        return view('employees.show', compact('employee'));
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Employee  $employee
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Employee $employee)
+    public function edit($id)
     {
-        return view('employees.edit', compact('employee'));
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Employee  $employee
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Employee $employee)
+    public function update(Request $request, $id)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'position' => 'required|string|max:255',
-            'salary' => 'required|numeric|min:0',
-        ]);
-
-        $employee->update($request->all());
-        
-        return redirect()->route('employees.index')
-            ->with('success', 'Pegawai berhasil diperbarui!');
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Employee  $employee
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Employee $employee)
+    public function destroy($id)
     {
-        $employee->delete();
-        
-        return redirect()->route('employees.index')
-            ->with('success', 'Pegawai berhasil dihapus!');
+        //
     }
 }

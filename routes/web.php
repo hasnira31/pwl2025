@@ -1,8 +1,6 @@
-
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\EmployeeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +14,5 @@ use App\Http\Controllers\EmployeeController;
 */
 
 Route::get('/', function () {
-    return redirect()->route('employees.index');
+    return view('welcome');
 });
-
-Route::resource('employees', EmployeeController::class);
