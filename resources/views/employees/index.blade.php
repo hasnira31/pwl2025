@@ -2,69 +2,68 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="card">
-        <div class="card-header d-flex justify-content-between align-items-center">
-            <h3 class="mb-0">Data Pegawai</h3>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="mb-0"><i class="bi bi-list-ul me-2"></i>Daftar Pegawai</h2>
             <a href="{{ route('employees.create') }}" class="btn btn-primary">
-                <i class="bi bi-plus-circle"></i> Tambah Pegawai
+                <i class="bi bi-plus-circle me-1"></i>Tambah Pegawai
             </a>
         </div>
-        <div class="card-body">
-            @if(session('success'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    {{ session('success') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            @endif
-
-            <div class="table-responsive">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Nama</th>
-                            <th>Email</th>
-                            <th>Alamat</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse($employees as $employee)
+        
+        <div class="card">
+            <div class="card-body p-0">
+                @if(count($employees) > 0)
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead>
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
+                                <th width="60" class="text-center">No</th>
+                                <th>Nama</th>
+                                <th>Posisi</th>
+                                <th>Gaji</th>
+                                <th width="220" class="text-center">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($employees as $employee)
+                            <tr>
+                                <td class="text-center">{{ $loop->iteration + $employees->firstItem() - 1 }}</td>
                                 <td>{{ $employee->name }}</td>
-                                <td>{{ $employee->email }}</td>
-                                <td>{{ $employee->address }}</td>
-                                <td>
-                                    <div class="d-flex gap-2">
-                                        <a href="{{ route('employees.show', $employee->id) }}" class="btn btn-info btn-sm">
-                                            <i class="bi bi-eye"></i> Detail
-                                        </a>
-                                        <a href="{{ route('employees.edit', $employee->id) }}" class="btn btn-primary btn-sm">
-                                            <i class="bi bi-pencil"></i> Edit
-                                        </a>
-                                        <form action="{{ route('employees.destroy', $employee->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm">
-                                                <i class="bi bi-trash"></i> Hapus
-                                            </button>
-                                        </form>
-                                    </div>
+                                <td>{{ $employee->position }}</td>
+                                <td>{{ $employee->formatted_salary }}</td>
+                                <td class="text-center">
+                                    <a href="{{ route('employees.show', $employee->id) }}" class="btn btn-sm btn-info text-white">
+                                        <i class="bi bi-eye me-1"></i>Detail
+                                    </a>
+                                    <a href="{{ route('employees.edit', $employee->id) }}" class="btn btn-sm btn-warning text-white">
+                                        <i class="bi bi-pencil-square me-1"></i>Edit
+                                    </a>
+                                    <form action="{{ route('employees.destroy', $employee->id) }}" method="POST" class="d-inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
+                                            <i class="bi bi-trash me-1"></i>Hapus
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
-                        @empty
-                            <tr>
-                                <td colspan="5" class="text-center">Tidak ada data pegawai</td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="d-flex justify-content-end">
-                {{ $employees->links() }}
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <div class="p-3">
+                    {{ $employees->links() }}
+                </div>
+                @else
+                <div class="p-4 text-center">
+                    <i class="bi bi-exclamation-circle fs-1 text-muted"></i>
+                    <p class="mt-2 mb-0">Belum ada data pegawai yang tersedia</p>
+                    <a href="{{ route('employees.create') }}" class="btn btn-primary mt-3">
+                        <i class="bi bi-plus-circle me-1"></i>Tambah Pegawai Pertama
+                    </a>
+                </div>
+                @endif
             </div>
         </div>
     </div>

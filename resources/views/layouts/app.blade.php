@@ -1,136 +1,86 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ config('app.name', 'Sistem Manajemen Pegawai') }}</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>{{ config('app.name') }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <style>
-        :root {
-            --primary-color: #FFB6C1; /* Light Pink */
-            --secondary-color: #FFC0CB; /* Pink */
-            --accent-color: #FF69B4; /* Hot Pink */
-            --light-color: #FFF0F5; /* Lavender Blush */
-            --dark-color: #DB7093; /* Pale Violet Red */
-            --text-color: #4A4A4A;
-        }
-        
         body {
-            background-color: var(--light-color);
-            color: var(--text-color);
+            background-color: #f0f2f5;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
         .navbar {
-            background-color: var(--primary-color);
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            background-color: #1a73e8;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-        
         .navbar-brand {
-            color: #fff;
+            color: white;
             font-weight: bold;
+            letter-spacing: 0.5px;
         }
-        
-        .navbar-nav .nav-link {
-            color: #fff;
-        }
-        
         .card {
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             border: none;
-            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            margin-bottom: 24px;
+            overflow: hidden;
         }
-        
         .card-header {
-            background-color: var(--primary-color);
-            color: white;
-            border-radius: 10px 10px 0 0 !important;
-            padding: 15px 20px;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
             font-weight: 600;
+            padding: 15px 20px;
         }
-        
         .btn-primary {
-            background-color: var(--accent-color);
-            border-color: var(--accent-color);
+            background-color: #1a73e8;
+            border-color: #1a73e8;
         }
-        
         .btn-primary:hover {
-            background-color: var(--dark-color);
-            border-color: var(--dark-color);
+            background-color: #0d66da;
+            border-color: #0d66da;
         }
-        
-        .btn-success {
-            background-color: #77DD77;
-            border-color: #77DD77;
-        }
-        
         .btn-danger {
-            background-color: #FF6961;
-            border-color: #FF6961;
+            background-color: #ea4335;
+            border-color: #ea4335;
         }
-        
+        .btn-danger:hover {
+            background-color: #d33426;
+            border-color: #d33426;
+        }
+        .pagination {
+            justify-content: center;
+        }
         .table {
-            border-collapse: separate;
-            border-spacing: 0;
+            border-radius: 8px;
+            overflow: hidden;
         }
-        
-        .table th {
-            background-color: var(--secondary-color);
-            color: white;
+        .table thead th {
+            background-color: #f8f9fa;
+            border-color: #e9ecef;
+            font-weight: 600;
+            color: #5f6368;
         }
-        
-        .table-hover tbody tr:hover {
-            background-color: rgba(255, 182, 193, 0.1);
-        }
-        
-        .pagination .page-item.active .page-link {
-            background-color: var(--accent-color);
-            border-color: var(--accent-color);
-        }
-        
-        .pagination .page-link {
-            color: var(--accent-color);
-        }
-        
-        .footer {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 20px 0;
-            margin-top: 30px;
+        .form-control:focus {
+            border-color: #1a73e8;
+            box-shadow: 0 0 0 0.2rem rgba(26, 115, 232, 0.25);
         }
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg mb-4">
+    <nav class="navbar navbar-expand-lg navbar-dark mb-4">
         <div class="container">
-            <a class="navbar-brand" href="{{ url('/') }}">{{ config('app.name', 'Sistem Manajemen Pegawai') }}</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('employees.index') }}">Data Pegawai</a>
-                    </li>
-                </ul>
-            </div>
+            <a class="navbar-brand" href="{{ route('employees.index') }}">
+                <i class="bi bi-people-fill me-2"></i>Sistem Manajemen Pegawai
+            </a>
         </div>
     </nav>
 
-    <main class="container">
+    <div class="container">
         @yield('content')
-    </main>
+    </div>
 
-    <footer class="footer mt-5">
-        <div class="container text-center">
-            <p>&copy; {{ date('Y') }} Sistem Manajemen Pegawai. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
