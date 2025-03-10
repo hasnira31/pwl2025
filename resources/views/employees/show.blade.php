@@ -67,3 +67,65 @@
     </div>
 </div>
 @endsection
+@extends('layouts.app')
+
+@section('content')
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Detail Pegawai</h5>
+                <a class="btn btn-sm btn-primary" href="{{ route('employees.index') }}">
+                    <i class="bi bi-arrow-left me-1"></i>Kembali
+                </a>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-8 offset-md-2">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Nama</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        {{ $employee->name }}
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Posisi</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        {{ $employee->position }}
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Gaji</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        Rp {{ number_format($employee->salary, 0, ',', '.') }}
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-center gap-2">
+                                    <a href="{{ route('employees.edit', $employee->id) }}" class="btn btn-primary">
+                                        <i class="bi bi-pencil me-1"></i>Edit
+                                    </a>
+                                    <form action="{{ route('employees.destroy', $employee->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
+                                            <i class="bi bi-trash me-1"></i>Hapus
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
