@@ -1,3 +1,4 @@
+
 <?php
 
 namespace App\Http\Controllers;
@@ -37,38 +38,36 @@ class EmployeeController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'position' => 'required|string|max:255',
-            'salary' => 'required|numeric|min:0',
+            'name' => 'required',
+            'position' => 'required',
+            'salary' => 'required|numeric',
         ]);
 
         Employee::create($request->all());
 
         return redirect()->route('employees.index')
-            ->with('success', 'Pegawai berhasil ditambahkan.');
+            ->with('success', 'Data pegawai berhasil ditambahkan.');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Employee $employee)
     {
-        $employee = Employee::findOrFail($id);
         return view('employees.show', compact('employee'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Employee $employee)
     {
-        $employee = Employee::findOrFail($id);
         return view('employees.edit', compact('employee'));
     }
 
@@ -76,18 +75,17 @@ class EmployeeController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Employee $employee)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'position' => 'required|string|max:255',
-            'salary' => 'required|numeric|min:0',
+            'name' => 'required',
+            'position' => 'required',
+            'salary' => 'required|numeric',
         ]);
 
-        $employee = Employee::findOrFail($id);
         $employee->update($request->all());
 
         return redirect()->route('employees.index')
@@ -97,15 +95,14 @@ class EmployeeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Employee $employee)
     {
-        $employee = Employee::findOrFail($id);
         $employee->delete();
 
         return redirect()->route('employees.index')
-            ->with('success', 'Pegawai berhasil dihapus.');
+            ->with('success', 'Data pegawai berhasil dihapus.');
     }
 }
