@@ -54,3 +54,56 @@
     </div>
 </div>
 @endsection
+@extends('layouts.app')
+
+@section('content')
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <span>Detail Pegawai</span>
+                <a href="{{ route('employees.index') }}" class="btn btn-sm btn-secondary">Kembali</a>
+            </div>
+            <div class="card-body">
+                <div class="row mb-3">
+                    <div class="col-md-4 fw-bold">ID</div>
+                    <div class="col-md-8">{{ $employee->id }}</div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-4 fw-bold">Nama</div>
+                    <div class="col-md-8">{{ $employee->name }}</div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-4 fw-bold">Email</div>
+                    <div class="col-md-8">{{ $employee->email }}</div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-4 fw-bold">Jabatan</div>
+                    <div class="col-md-8">{{ $employee->position }}</div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-4 fw-bold">Departemen</div>
+                    <div class="col-md-8">{{ $employee->department }}</div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-4 fw-bold">Dibuat pada</div>
+                    <div class="col-md-8">{{ $employee->created_at->format('d M Y H:i') }}</div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-4 fw-bold">Diperbarui pada</div>
+                    <div class="col-md-8">{{ $employee->updated_at->format('d M Y H:i') }}</div>
+                </div>
+                
+                <div class="d-flex justify-content-end mt-4">
+                    <a href="{{ route('employees.edit', $employee) }}" class="btn btn-warning text-white me-2">Edit</a>
+                    <form action="{{ route('employees.destroy', $employee) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus pegawai ini?');">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Hapus</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
